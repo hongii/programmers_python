@@ -7,5 +7,5 @@ def solution(s):
         removeTotal += total - removeZero
         s = bin(removeZero)[2:]
         cnt += 1
-
+        
     return [cnt, removeTotal]
