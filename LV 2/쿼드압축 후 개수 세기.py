@@ -1,3 +1,35 @@
+# 2회차 풀이 -> 분할 정복
+def divideConquer(x, y, size, arr):
+    global zeroCnt, oneCnt 
+    if size > 1 and all(arr[i][j] == 1 for i in range(x, x+size) for j in range(y, y+size)):
+        oneCnt += 1
+        return
+    if size > 1 and all(arr[i][j] == 0 for i in range(x, x+size) for j in range(y, y+size)):
+        zeroCnt += 1
+        return
+    
+    if size == 1:
+        if arr[x][y] == 1:
+            oneCnt += 1
+        else:
+            zeroCnt += 1
+    
+    else:
+        size //= 2
+        divideConquer(x, y, size, arr)
+        divideConquer(x+size, y, size, arr)
+        divideConquer(x, y+size, size, arr)
+        divideConquer(x+size, y+size, size, arr)
+            
+    
+def solution(arr):
+    global zeroCnt, oneCnt 
+    zeroCnt, oneCnt = 0, 0
+    divideConquer(0, 0, len(arr), arr)
+    return [zeroCnt, oneCnt]
+
+
+# 1회차 풀이
 import sys
 sys.setrecursionlimit(10**6)
 def compression(x1, x2, y1, y2, arr):
