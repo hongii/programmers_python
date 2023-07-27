@@ -1,3 +1,36 @@
+# 2회차 풀이 -> 2차원 배열을 1차원 배열로 바꾸는 방법 숙지 -> list(itertools.chain(*arr))
+import itertools
+def solution(n):
+    arr = [[0]*i for i in range(1, n+1)]
+    size = n
+    num = 1
+    x, y = 0, 0
+    while size > 0:
+        for _ in range(size): # 아래 방향 ↓
+            
+            arr[x][y] = num
+            num += 1
+            x += 1
+        size -= 1
+        x, y = x-1, y+1
+
+        for _ in range(size): # 가로 방향 →
+            arr[x][y] = num
+            num += 1
+            y += 1
+        size -= 1
+        x, y = x-1, y-2
+
+        for _ in range(size): # 왼쪽 대각선 위쪽 방향 ↖ 
+            arr[x][y] = num
+            num += 1
+            x, y = x-1, y-1
+        size -= 1
+        x, y = x+2, y+1
+        
+    return list(itertools.chain(*arr))
+
+# 1회차 풀이
 import itertools
 def solution(n):
     snail = [[0]*i for i in range(1, n+1)]
