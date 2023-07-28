@@ -1,3 +1,34 @@
+### 2회차 풀이 ###
+from itertools import permutations
+import re
+def calculate(a, b, op):
+    if op == "+":
+        return a+b
+    elif op == "-":
+        return a-b
+    elif op == "*":
+        return a*b
+    
+def solution(expression):
+    expList = re.split("([\*\-\+])", expression)
+    ops = set([x for x in expList if not x.isdecimal()])
+    pm = list(permutations(ops))
+    
+    maxRes = 0
+    for p in pm:
+        res = 0
+        tmp = expList.copy()
+        for op in p:
+            while len(tmp) > 1 and op in tmp:
+                idx = tmp.index(op)
+                num = calculate(int(tmp[idx-1]), int(tmp[idx+1]), op)
+                tmp = tmp[:idx-1] + [num] + tmp[idx+2:]
+        if maxRes < abs(tmp[0]):
+            maxRes = abs(tmp[0])
+    return maxRes
+
+
+### 1회차 풀이 ###
 from itertools import permutations
 import re
 
