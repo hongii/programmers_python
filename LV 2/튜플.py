@@ -1,3 +1,21 @@
+# 2회차 코드
+def solution(s):
+    s = s[2:-2]
+    s = s.split("},{")
+    tmp = []
+    for x in s:
+        x = x.split(",")
+        tmp.append(set(x))
+    tmp.sort(key=lambda x:len(x))
+    
+    res = [int(*tmp[0])]
+    for i in range(1, len(tmp)):
+        nextNum = tmp[i] - tmp[i-1] 
+        res.append(int(*nextNum))
+    return res
+
+
+# 1회차 코드
 def solution(s):
     s = s[2:-2]
     l = s.split("},{")
