@@ -1,3 +1,22 @@
+# 2회차 풀이
+def solution(dirs):
+    dis = 0
+    dic = {"L":(-1, 0), "R":(1, 0), "U":(0, 1), "D":(0,-1)}
+    now = (0, 0)
+    s = set()
+    for d in dirs:
+        dx = now[0] + dic[d][0]
+        dy = now[1] + dic[d][1]
+        if -5 <= dx <= 5 and -5 <= dy <= 5:
+            if (now, (dx, dy)) not in s:
+                dis += 1
+                s.add((now, (dx, dy)))
+                s.add(((dx, dy), now))
+            now = (dx, dy)
+    return dis
+
+
+# 1회차 풀이
 def solution(dirs):
     dis = 0
     x, y = 5, 5
