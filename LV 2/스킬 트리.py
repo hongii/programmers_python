@@ -1,3 +1,22 @@
+# 2회차 풀이
+def solution(skill, skill_trees):
+    res = 0
+    for skill_tree in skill_trees:
+        check = {key:27 for key in skill}
+        order = 1
+        for s in skill_tree:
+            if s in check.keys():
+                check[s] = order
+                order += 1
+                
+        for i in range(len(skill)-1):
+            if check[skill[i]] > check[skill[i+1]]: break
+        else:
+            res += 1
+    return res
+
+
+# 1회차 풀이
 def solution(skill, skill_trees):
     res = 0
     for skillTree in skill_trees:
