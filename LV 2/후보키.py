@@ -6,6 +6,34 @@ ps. 문제 조건
   즉, 릴레이션의 모든 튜플을 유일하게 식별하는 데 꼭 필요한 속성들로만 구성되어야 한다.
 '''
 
+# 2회차 풀이_최소성 먼저 판단 후 유일성 판단 
+from itertools import combinations
+def solution(relation):
+    end = len(relation[0])
+    s_cb = set()
+    for i in range(1, end+1):
+        colIdxCb = list(combinations(range(0, end), i))
+        for cb in colIdxCb:
+            s = set()
+            for info in relation:
+                check = True
+                tmp = []
+                
+                for sub in s_cb: # 해당 후보키 조합이 최소성을 만족하는지 판단
+                    if set(sub).issubset(set(cb)):
+                        check = False # 최소성 만족 안하는 경우
+                        break
+                        
+                if check: # 최소성 만족하는 경우에만 후보키 조합을 판단
+                    for col in cb: 
+                        tmp.append(info[col])
+                    s.add(tuple(tmp))
+                    if len(s) == len(relation): # 유일성 판단
+                        s_cb.add(cb) # 유일성과 최소성 모두 만족하는 후보키 조합
+    return len(s_cb)    
+
+
+# 1회차 풀이_유일성 판단 후 최소성 판단
 from itertools import combinations
 def solution(relation):
     res = set()
