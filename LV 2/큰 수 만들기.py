@@ -1,3 +1,19 @@
+# 2회차 코드
+def solution(number, k):
+    s = []
+    for i in range(len(number)):
+        while s and k and number[i] > s[-1] :
+            s.pop()
+            k -= 1
+        s.append(number[i])
+        
+    if k > 0:
+        s = s[:-k]
+    return "".join(s)
+
+
+
+# 1회차 코드
 # 그리디(탐욕법) -> stack이용 (다른사람 풀이 참고)
 def solution(number, k):
     stack = []
