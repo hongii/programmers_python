@@ -1,3 +1,17 @@
+# 2회차 코드
+import re
+def solution(files):
+    sortedFiles = []
+    for idx, f in enumerate(files):
+        f = f.lower()
+        number = re.search('[0-9]+', f)
+        file = (f[:number.start()], int(number.group()), idx, files[idx])
+        sortedFiles.append(file)
+    sortedFiles.sort(key=lambda x:(x[0], int(x[1]), x[2]))
+    return list(map(lambda x: x[3],sortedFiles))
+
+
+# 1회차 코드
 # re라이브러리 -> search()메서드 활용
 import re
 def solution(files):
