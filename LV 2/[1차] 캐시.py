@@ -13,6 +13,31 @@
   => cache miss : CPU 가 참조하고자 하는 메모리(참조값)가 캐시에 존재하지 않을 경우 -> head에 해당 참조값을 추가한다.
   => cache hit : CPU 가 참조하고자 하는 메모리(참조값)가 캐시에 존재하고 있을 경우 -> 해당 참조값을 캐시의 head 위치로 옮긴다.
 '''
+
+# 2회차 코드
+from collections import deque
+def solution(cacheSize, cities):
+    hit, miss = 1, 5
+    if cacheSize ==  0:
+        return len(cities) * miss
+    
+    cache = deque()    
+    times = 0
+    for city in cities:
+        city = city.lower()
+        if city not in cache:
+            times += miss
+            if len(cache) == cacheSize:
+                cache.pop()
+            cache.appendleft(city)
+        else:
+            times += hit
+            cache.remove(city)
+            cache.appendleft(city)
+    return times
+
+
+# 1회차 코드
 from collections import deque
 def solution(cacheSize, cities):
     for i in range(len(cities)):
