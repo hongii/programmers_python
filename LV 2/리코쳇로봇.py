@@ -57,6 +57,7 @@ def bfs(board):
         if "R" in board[i]:
             start_x, start_y = i, board[i].index("R")
             dq.append((start_x, start_y, 0))
+            visited.add((start_x, start_y))
             break
     
     while dq:
@@ -65,7 +66,6 @@ def bfs(board):
         if board[x][y] == "G":
             return cnt
         
-        visited.add((x, y))
         for i in range(4):
             x_ = dx[i] + x
             y_ = dy[i] + y
