@@ -1,3 +1,29 @@
+# 2회차 코드
+import heapq as hq
+def solution(n, k, enemy):
+    if len(enemy) == k:
+        return len(enemy)
+    
+    r = 0 # 라운드 횟수
+    soldier = [] # 무적권으로 처치한 적군을 담는 최소힙 -> 무적권 다쓰고나면, 무적권으로 처치한 적군의 수 중 가장 적은 수를 꺼내서 n(남은병사)에서 뺴주기 위함
+    for i in range(len(enemy)):
+        if k > 0: # 무적권 먼저 다씀
+            k -= 1
+            hq.heappush(soldier, enemy[i])
+        else: 
+            # 무적권 다쓰고 나면, 무적권으로 패스시킨 적군의 숫자 중 가장 작은 숫자(soldier[0])를 현재 처치할 적군의 수(enemy[i])와 비교
+            if soldier[0] < enemy[i] and  n - soldier[0] >= 0: # 현재 처치할 적군의 수가 더 많다면, 무적권으로 패스시킨 적군과 바꿔치기
+                n -= hq.heappop(soldier)
+                hq.heappush(soldier, enemy[i])
+            elif n - enemy[i] >= 0: # 무적권으로 패스시킨 적군의 수보다 현재 처치할 적군의 수가 더 적거나 같은 경우, 남아있는 병사들에서 현재 처치할 적군을 빼줌
+                n -= enemy[i]
+            else: # 남아있는 병사들의 수가 현재 처치할 적군의 수보다 더 적은 경우 -> 게임 종료
+                break
+        r += 1
+    return r     
+
+
+# 1회차 코드
 import heapq as hq
 def solution(n, k, enemy):
     if len(enemy) == k:
