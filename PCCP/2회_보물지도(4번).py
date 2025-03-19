@@ -1,6 +1,6 @@
 # bfs, 3차원 배열
 from collections import deque
-def solution(n, m, hole):
+def solution(n, m, hole): # n: 가로길이(col), m: 세로길이(row)
     global time, board
     time = [[[float('inf')] * 2 for j in range(n)] for i in range(m)] # time[i][j][0] -> (i, j)좌표로 이동할 때 신발 사용하지 않고 걸린시간, time[i][j][1] -> 신발 사용하고 걸린시간
     board = [[1]*n for _ in range(m)]
