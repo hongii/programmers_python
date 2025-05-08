@@ -1,4 +1,6 @@
 # 2회차 코드
+# 숫자의 순서를 유지하면서 최대한 큰 수를 만들어야 함 => 그리디 알고리즘 & stack 이용
+# 시간복잡도 => 전체 순회 : O(N)
 def solution(number, k):
     s = []
     for i in range(len(number)):
